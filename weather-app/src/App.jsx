@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Container, Row, Col } from "react-bootstrap";
 import CurrentWeather from './components/CurrentWeather';
 import SearchableDropdown from './components/SearchableDropdown';
+import MostViewedCities from './components/mostViewedCitites';
 
 
 function App() {
@@ -75,30 +76,47 @@ function App() {
   fetchWeather(city.name);     // Fetch weather for that city
   setSearchTerm("");           // Clear search input
   setCityResults([]);          // Clear dropdown
+
+  // Update viewed cities count in localStorage
+  const viewedCities = JSON.parse(localStorage.getItem("viewedCities")) || {};
+  const cityKey = `${city.name},${city.countryCode}`; // Unique key
+  viewedCities[cityKey] = (viewedCities[cityKey] || 0) + 1;
+  localStorage.setItem("viewedCities", JSON.stringify(viewedCities));
+
 };
 
 
   return (
     <Container className="py-5">
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <h1 className="text-center mb-4">Weather App</h1>
-          <SearchableDropdown
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            cityResults={cityResults}
-            handleSelectCity={handleSelectCity}
-            setSelectedCity={setSelectedCity}
-            setError={setError}  
-          />
-          <CurrentWeather
-              selectedCity={selectedCity}
-              weather={weather}
-              error={error}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <h1 className="text-center mb-4">Weather App</h1>
+  <Row>
+      {/* Sidebar: Most Viewed Cities */}
+    <Col md={4} xs={12} className="mb-4 mb-md-0 order-1 order-md-2">
+      <MostViewedCities 
+      selectedCity={selectedCity} 
+      handleSelectCity={handleSelectCity} 
+      />
+    </Col>
+
+       {/* Main Content (Search & Weather) */}
+      <Col md={8} xs={12} className="order-2 order-md-1">  
+      <SearchableDropdown
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        cityResults={cityResults}
+        handleSelectCity={handleSelectCity}
+        setSelectedCity={setSelectedCity}
+        setError={setError}
+      />
+      <CurrentWeather
+        selectedCity={selectedCity}
+        weather={weather}
+        error={error}
+      />
+    </Col>
+  </Row>
+</Container>
+
   );
 }
 

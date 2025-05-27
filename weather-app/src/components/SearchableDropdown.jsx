@@ -9,20 +9,21 @@ function SearchableDropdown({
   setSelectedCity,
   setError,
 }) {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [showDropdown, setShowDropdown] = useState(false); //whether to show the dropdown
+  const [highlightedIndex, setHighlightedIndex] = useState(-1); //tracks which item is highlighted
 
-  const wrapperRef = useRef(null); // for click outside
+  const wrapperRef = useRef(null); // detect clicks outside of dropdown
 
   
   const handleInputChange = (e) => {
     const val = e.target.value;
-    setSearchTerm(val);
-    setSelectedCity(null);
-    setError('');
+    setSearchTerm(val); //update what user types
+    setSelectedCity(null); // Clear selected city
+    setError(''); // Clear any previous error
     setShowDropdown(true); // Always show when typing
   };
 
+  // handle keyboard navigation
   const handleKeyDown = (e) => {
     if (!showDropdown || cityResults.length === 0) return;
 
@@ -50,7 +51,6 @@ function SearchableDropdown({
         setShowDropdown(false);
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);

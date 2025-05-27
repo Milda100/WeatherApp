@@ -5,8 +5,6 @@ import { Card } from "react-bootstrap";
 
   return (
     <>
-      {selectedCity && <h5 className="mb-3">Weather in {selectedCity.name}</h5>}
-
       {error && <div className="alert alert-danger">{error}</div>}
 
       {weather && (
