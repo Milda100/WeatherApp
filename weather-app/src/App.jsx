@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CurrentWeather from './components/CurrentWeather';
 import SearchableDropdown from './components/SearchableDropdown';
 import MostViewedCities from './components/mostViewedCitites';
+import Forecast from './components/Forecast';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [cityResults, setCityResults] = useState([]); //cities matching search
   const [selectedCity, setSelectedCity] = useState(null); //slected city from results
   const [weather, setWeather] = useState(null); //weather data for slected city
+  const [forecast, setForcast] = useState(null); // 5 day weather forecast for selected city
   const [error, setError] = useState(""); //error message if city not found
 
   const cityApiKey = import.meta.env.VITE_CITY_API_KEY;
@@ -57,16 +59,20 @@ function App() {
   //fetching weather form OpenWeatherMap API
   const fetchWeather = async (cityName) => {
     try {
-      const weatherResp = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${weatherApiKey}&units=metric`
-      );
+      const [weatherResp, forecastResp] = await Promise.all([
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${weatherApiKey}&units=metric`),
+        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${weatherApiKey}&units=metric`)
+      ]);
 
       console.log("Weather Response:", weatherResp.data);
+      console.log("Forecast Response:", forecastResp.data);
 
       setWeather(weatherResp.data);
+      setForcast(forecastResp.data);
       setError("");
     } catch (err) {
       setWeather(null);
+      setForcast(null);
       setError("City not found or weather unavailable.");
     }
   };
@@ -111,6 +117,10 @@ function App() {
       <CurrentWeather
         selectedCity={selectedCity}
         weather={weather}
+        error={error}
+      />
+      <Forecast 
+        forecast={forecast}
         error={error}
       />
     </Col>
