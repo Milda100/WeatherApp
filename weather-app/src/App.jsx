@@ -89,6 +89,13 @@ function App() {
   viewedCities[cityKey] = (viewedCities[cityKey] || 0) + 1;
   localStorage.setItem("viewedCities", JSON.stringify(viewedCities));
 
+  // Log city selection to server
+  axios.post('http://localhost:5000/log-city-selection', {
+    city: city.name,
+    countryCode: city.countryCode
+  }).catch(err => {
+    console.error("Failed to log city selection:", err);
+  });
 };
 
 

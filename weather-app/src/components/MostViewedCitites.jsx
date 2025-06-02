@@ -31,7 +31,7 @@ function MostViewedCities({ selectedCity, handleSelectCity }) {
                 key={city}  
                 onClick={() => handleSelectCity({ name: city, countryCode })} 
                 style={{ cursor: 'pointer' }}>
-                    {city} <span className="text-muted">({count} views)</span>
+                    {city}, {countryCode}
                 </ListGroup.Item>
                 ))}
             </ListGroup>
