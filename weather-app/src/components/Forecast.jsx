@@ -1,5 +1,6 @@
 import { Card, Row, Col } from "react-bootstrap";
 import dayjs from "dayjs";
+import getWeatherImg from "./getWeatherImg";
 
 function Forecast({ forecast, error }) {
 
@@ -26,10 +27,12 @@ console.log("Grouped forecast by date:", daily);
       const minTemp = Math.min(...temps).toFixed(1);
       const maxTemp = Math.max(...temps).toFixed(1);
       const description = data[Math.floor(data.length / 2)].weather[0].description;
+      const weatherImg = getWeatherImg(data[0].weather[0].main);
 
-      return { date, minTemp, maxTemp, description };
+      return { date, minTemp, maxTemp, description, weatherImg };
     });
 
+    
 
     return (
   <>
@@ -43,6 +46,12 @@ console.log("Grouped forecast by date:", daily);
               <Col key={idx} sm={6} md={4} lg={2} className="mb-3">
                 <Card className="text-center">
                   <Card.Body>
+                    <Card.Img
+                      variant="top"
+                      src={day.weatherImg}
+                      alt={day.description}
+                      style={{ height: "100px", objectFit: "cover" }}
+                    />
                     <Card.Title>{dayjs(day.date).format('ddd, MMM D')}</Card.Title>
                     <Card.Text>
                     <strong>High:</strong> {Math.round(day.maxTemp)}°C<br />

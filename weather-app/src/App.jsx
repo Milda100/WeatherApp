@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Container, Row, Col } from "react-bootstrap";
 import CurrentWeather from './components/CurrentWeather';
 import SearchableDropdown from './components/SearchableDropdown';
-import MostViewedCities from './components/mostViewedCitites';
+import MostViewedCities from './components/MostViewedCitites';
 import Forecast from './components/Forecast';
 
 
@@ -13,7 +13,7 @@ function App() {
   const [cityResults, setCityResults] = useState([]); //cities matching search
   const [selectedCity, setSelectedCity] = useState(null); //slected city from results
   const [weather, setWeather] = useState(null); //weather data for slected city
-  const [forecast, setForcast] = useState(null); // 5 day weather forecast for selected city
+  const [forecast, setForecast] = useState(null); // 5 day weather forecast for selected city
   const [error, setError] = useState(""); //error message if city not found
 
   const cityApiKey = import.meta.env.VITE_CITY_API_KEY;
@@ -46,7 +46,7 @@ function App() {
   //Only call the API when the user stops typing for a second
     useEffect(() => {
     const delayDebounce = setTimeout(() => {
-        if (searchTerm.length > 1) { // Only search if > 1 characters
+        if (searchTerm.length > 2) { // Only search if > 2 characters
         fetchCities(searchTerm);
         } else {
         setCityResults([]);
@@ -68,11 +68,11 @@ function App() {
       console.log("Forecast Response:", forecastResp.data);
 
       setWeather(weatherResp.data);
-      setForcast(forecastResp.data);
+      setForecast(forecastResp.data);
       setError("");
     } catch (err) {
       setWeather(null);
-      setForcast(null);
+      setForecast(null);
       setError("City not found or weather unavailable.");
     }
   };
