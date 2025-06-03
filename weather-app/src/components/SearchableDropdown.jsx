@@ -68,7 +68,7 @@ function SearchableDropdown({
           className="mb-2"
           autoComplete="off"
         />
-        <Dropdown.Menu style={{ width: '100%' }} className="shadow">
+        <Dropdown.Menu>
           {cityResults.map((city, idx) => (
             <Dropdown.Item
               key={city.id}

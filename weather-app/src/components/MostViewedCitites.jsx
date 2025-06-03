@@ -26,14 +26,17 @@ function MostViewedCities({ selectedCity, handleSelectCity }) {
             <Card id="most-viewed-cities">
             <Card.Header as="h3">Most Viewed Cities</Card.Header>
             <ListGroup variant="flush">
+
                 {mostViewedCities.map(({ city, countryCode }) => (
                 <ListGroup.Item 
                 key={city}  
-                onClick={() => handleSelectCity({ name: city, countryCode })} 
-                style={{ cursor: 'pointer' }}>
-                    {city}, {countryCode}
+                onClick={() => handleSelectCity({ name: city, countryCode })}
+                >
+
+                {city}, {countryCode}
                 </ListGroup.Item>
                 ))}
+                
             </ListGroup>
             </Card>
         )}

@@ -35,27 +35,28 @@ console.log("Grouped forecast by date:", daily);
     
 
     return (
-  <>
+  <div className="d-flex justify-content-center">
     {error && <div className="mt-4 alert alert-danger">{error}</div>}
     {forecast && (
-      <Card className="mt-4 shadow">
+      
+      <Card id="forecast" className="text-center">
         <Card.Header as="h3">5-Day Forecast</Card.Header>
         <Card.Body>
-          <Row>
+          <Row className="d-flex justify-content-center">
             {summarized.map((day, idx) => (
-              <Col key={idx} sm={6} md={4} lg={2} className="mb-3">
-                <Card className="text-center">
+              <Col key={idx} className="d-flex justify-content-center" id="forecast-card">
+                <Card>
                   <Card.Body>
+                    <Card.Title><strong>{dayjs(day.date).format('ddd, MMM D')}</strong></Card.Title>
                     <Card.Img
                       variant="top"
                       src={day.weatherImg}
                       alt={day.description}
-                      style={{ height: "100px", objectFit: "cover" }}
+                      id="img-forecast"
                     />
-                    <Card.Title>{dayjs(day.date).format('ddd, MMM D')}</Card.Title>
-                    <Card.Text>
-                    <strong>High:</strong> {Math.round(day.maxTemp)}°C<br />
-                    <strong>Low:</strong> {Math.round(day.minTemp)}°C<br />
+                    <Card.Text className="text-capitalize">
+                    <strong>High: {Math.round(day.maxTemp)}°C</strong><br />
+                    <strong>Low: {Math.round(day.minTemp)}°C</strong><br />
                     {day.description}
                   </Card.Text>
                   </Card.Body>
@@ -66,7 +67,7 @@ console.log("Grouped forecast by date:", daily);
         </Card.Body>
       </Card>
     )}
-  </>
+  </div>
 );
 
 }

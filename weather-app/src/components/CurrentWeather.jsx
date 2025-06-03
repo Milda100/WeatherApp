@@ -16,7 +16,7 @@ const weatherImg = getWeatherImg(currentCondition);
       {error && <div className="alert alert-danger">{error}</div>}
 
       {weather && (
-        <Card className="text-center">
+        <Card className="text-center" id="current-weather">
           <Card.Body>
             <Card.Title as="h2">{weather.name}</Card.Title>
             <Card.Img
