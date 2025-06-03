@@ -8,7 +8,7 @@ function MostViewedCities({ selectedCity, handleSelectCity }) {
     const viewedCities = JSON.parse(localStorage.getItem("viewedCities")) || {};
     const sorted = Object.entries(viewedCities)
         .sort((a, b) => b[1] - a[1]) // Sort by view count descending
-        .slice(0, 3); // Top 3
+        .slice(0, 5); // Top 5
 
     return sorted.map(([cityKey, count]) => {
       const [city, countryCode] = cityKey.split(",");
@@ -23,10 +23,10 @@ function MostViewedCities({ selectedCity, handleSelectCity }) {
     return (
         <>
         {mostViewedCities.length > 0 && (
-            <Card className="mt-4 shadow">
-            <Card.Header as="h5">Most Viewed Cities</Card.Header>
+            <Card id="most-viewed-cities">
+            <Card.Header as="h3">Most Viewed Cities</Card.Header>
             <ListGroup variant="flush">
-                {mostViewedCities.map(({ city, countryCode, count }) => (
+                {mostViewedCities.map(({ city, countryCode }) => (
                 <ListGroup.Item 
                 key={city}  
                 onClick={() => handleSelectCity({ name: city, countryCode })} 

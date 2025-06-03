@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+//mixins
+@mixin make-container($width: 100%, $height: auto, $padding: 2rem 1.5rem, $margin: 2rem, $container-bg: white, $border-radius: 1rem) {
+  width: $width;
+  height: $height;
+  padding: $padding;
+  margin-right: auto;
+  margin-left: auto;
+  margin: $margin;
+  background-color: $container-bg;
+  border-radius: $border-radius;
+}
+
+//variables
+$background1: #f8b196;
+$background2: #f67280;
+$background3: #c06c84;
+$container-bg: #d6dee5;
+$container-shadow: #335c7d;
+$lighter-shadow: lighten-color($container-shadow, 10%);
+
+//scss
+body {
+  font-family: 'Nunito', sans-serif !important;
+  background: linear-gradient(90deg, $background1 0%, $background2 50%, $background3 100%);
+}
+
+.container {
+  @include make-container(50%, auto, 2rem 2rem, 2rem, $container-bg, 1rem);
+  box-shadow: 1px 1px 10px 10px $container-shadow;
+  
+}
+
+h1, h2, h3 {
+  font-weight: 700 !important;
+}
+
+#searchable-dropdown {
+    margin: 2rem auto;
+}
+
+#most-viewed-cities {
+    margin: 4.5rem auto;
+}
+
+#img-current {
+    width: 200px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 2rem;
+}
+
+.temp {
+  font-size: 2rem;
+  font-weight: 700;
+}
+

@@ -1,5 +1,7 @@
 import { Card } from "react-bootstrap";
 import getWeatherImg from "./getWeatherImg";
+import { FaDroplet, FaWind } from "react-icons/fa6";
+
 
 
 
@@ -14,23 +16,22 @@ const weatherImg = getWeatherImg(currentCondition);
       {error && <div className="alert alert-danger">{error}</div>}
 
       {weather && (
-        <Card className="my-4 mx-auto" style={{ maxWidth: "400px" }}>
+        <Card className="text-center">
           <Card.Body>
+            <Card.Title as="h2">{weather.name}</Card.Title>
             <Card.Img
               variant="top"
               src={weatherImg}
               alt={currentCondition}
-              style={{ height: "200px", objectFit: "cover" }}
+              id="img-current"
             />
-            <Card.Title>{weather.name}</Card.Title>
             <Card.Text className="text-capitalize">
               {weather.weather[0].description}
             </Card.Text>
           </Card.Body>
-          <p>Temperature: {Math.round(weather.main.temp)}°C</p>
-          <p>Conditions: {weather.weather[0].description}</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Wind: {weather.wind.speed} m/s</p>
+          <p className="temp">{Math.round(weather.main.temp)}°C</p>
+          <p><FaDroplet /> Humidity: {weather.main.humidity}%</p>
+          <p><FaWind /> Wind: {Math.round(weather.wind.speed)} m/s</p>
         </Card>
       )}
     </>

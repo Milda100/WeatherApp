@@ -56,8 +56,8 @@ function SearchableDropdown({
   }, []);
 
   return (
-    <div ref={wrapperRef}>
-      <h2>Select a City</h2>
+    <div ref={wrapperRef} id="searchable-dropdown">
+      <h3>Select a City</h3>
       <Dropdown show={showDropdown && cityResults.length > 0}>
         <Form.Control
           type="text"

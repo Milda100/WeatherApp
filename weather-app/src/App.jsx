@@ -100,8 +100,9 @@ function App() {
 
 
   return (
-    <Container className="py-5">
-    <h1 className="text-center mb-4">Weather App</h1>
+    <>
+    <Container>
+    <h1 className="text-center">Weather App</h1>
   <Row>
       {/* Sidebar: Most Viewed Cities */}
     <Col md={4} xs={12} className="mb-4 mb-md-0 order-1 order-md-2">
@@ -126,6 +127,10 @@ function App() {
         weather={weather}
         error={error}
       />
+    </Col>
+  </Row>
+  <Row>
+    <Col>
       <Forecast 
         forecast={forecast}
         error={error}
@@ -133,7 +138,7 @@ function App() {
     </Col>
   </Row>
 </Container>
-
+</>
   );
 }
 

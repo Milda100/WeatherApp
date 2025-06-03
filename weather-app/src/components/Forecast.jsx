@@ -39,7 +39,7 @@ console.log("Grouped forecast by date:", daily);
     {error && <div className="mt-4 alert alert-danger">{error}</div>}
     {forecast && (
       <Card className="mt-4 shadow">
-        <Card.Header as="h5">5-Day Forecast</Card.Header>
+        <Card.Header as="h3">5-Day Forecast</Card.Header>
         <Card.Body>
           <Row>
             {summarized.map((day, idx) => (
