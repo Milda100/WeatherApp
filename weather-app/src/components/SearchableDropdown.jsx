@@ -9,12 +9,10 @@ function SearchableDropdown({
   setSelectedCity,
   setError,
 }) {
-  const [showDropdown, setShowDropdown] = useState(false); //whether to show the dropdown
-  const [highlightedIndex, setHighlightedIndex] = useState(-1); //tracks which item is highlighted
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const wrapperRef = useRef(null); // detect clicks outside of dropdown
 
-  
   const handleInputChange = (e) => {
     const val = e.target.value;
     setSearchTerm(val); //update what user types

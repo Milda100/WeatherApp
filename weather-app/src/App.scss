@@ -5,11 +5,18 @@
   width: $width;
   height: $height;
   padding: $padding;
-  margin-right: auto;
-  margin-left: auto;
-  margin: $margin;
+  margin: $margin auto;
   background-color: $container-bg;
   border-radius: $border-radius;
+}
+
+@mixin responsive-container ($width: 100%, $height: auto, $padding: 0.5rem, $margin-bottom: 0.5rem) {
+  @media (max-width: 768px) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    margin-bottom: $margin-bottom;
+  }
 }
 
 //variables
@@ -29,7 +36,7 @@ body {
 .container {
   @include make-container(50%, auto, 2rem 2rem, 2rem, $container-bg, 1rem);
   box-shadow: 1px 1px 10px 10px $container-shadow;
-  
+  @include responsive-container;
 }
 
 h1, h2, h3 {
@@ -38,14 +45,6 @@ h1, h2, h3 {
 
 #searchable-dropdown {
     margin: 2rem auto;
-}
-
-#most-viewed-cities {
-    margin: 9rem auto;
-}
-
-#most-viewed-cities, #forecast, #current-weather {
-    box-shadow: 1px 1px 10px 2px $container-shadow;
 }
  
 #img-current {
@@ -62,10 +61,46 @@ h1, h2, h3 {
 
 #forecast, #most-viewed-cities, #current-weather {
   @include make-container(100%, auto, 0rem 0rem, 0rem, $container-bg, 1rem);
+  box-shadow: 1px 1px 10px 2px $container-shadow;
 }
 
-#forecast-card {
-  width: 300px;
+#most-viewed-cities {
+    margin-top: 2rem;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+#current-weather {
+  margin-bottom: 2rem;
+}
+
+#forecast > .card-body {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  #forecast > .card-body {
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .forecast-card {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.forecast-card {
+  min-width: 300px;
+  flex-shrink: 0;
 }
 
 #img-forecast {

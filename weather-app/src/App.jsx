@@ -7,7 +7,6 @@ import SearchableDropdown from './components/SearchableDropdown';
 import MostViewedCities from './components/MostViewedCitites';
 import Forecast from './components/Forecast';
 
-
 function App() {
   const [searchTerm, setSearchTerm] = useState(""); //what user types
   const [cityResults, setCityResults] = useState([]); //cities matching search
@@ -37,7 +36,7 @@ function App() {
         }
       );
       console.log("API response data:", response.data);
-      setCityResults(response.data.data); //save results to state
+      setCityResults(response.data.data);
     } catch (err) {
       console.error("Failed to fetch cities:", err);
     }
@@ -61,7 +60,7 @@ function App() {
     try {
       const [weatherResp, forecastResp] = await Promise.all([
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${weatherApiKey}&units=metric`),
-        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${weatherApiKey}&units=metric`)
+        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${weatherApiKey}&units=metric`),
       ]);
 
       console.log("Weather Response:", weatherResp.data);
@@ -100,19 +99,15 @@ function App() {
 
 
   return (
-    <>
     <Container>
     <h1 className="text-center">Weather App</h1>
   <Row>
-      {/* Sidebar: Most Viewed Cities */}
-    <Col md={4} xs={12} className="mb-4 mb-md-0 order-1 order-md-2">
+    <Col md={4} xs={12} className="order-1 order-md-2">
       <MostViewedCities 
       selectedCity={selectedCity} 
       handleSelectCity={handleSelectCity} 
       />
     </Col>
-
-       {/* Main Content (Search & Weather) */}
       <Col md={8} xs={12} className="order-2 order-md-1">  
       <SearchableDropdown
         searchTerm={searchTerm}
@@ -129,18 +124,12 @@ function App() {
       />
     </Col>
   </Row>
-  <Row>
-    <Col>
       <Forecast 
         forecast={forecast}
         error={error}
       />
-    </Col>
-  </Row>
 </Container>
-</>
   );
 }
 
-
-export default App
+export default App;

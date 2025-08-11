@@ -1,19 +1,15 @@
-import clearSky from "../assets/clear-sky.jpg";
-import cloudy from "../assets/cloudy.jpg";
-import rainy from "../assets/rain.2.jpg";
-import snowy from "../assets/snow.jpg";
-import thunderstorm from "../assets/thunder.jpg";
-
-const imgMap = {
-  Clear: clearSky,
-  Clouds: cloudy,
-  Rain: rainy,
-  Snow: snowy,
-  Thunderstorm: thunderstorm,
+export default function getWeatherImg(condition) {
+  const imgMap = {
+  Clear: "clear.svg",
+  Clouds: "cloudy.svg",
+  Rain: "rain.svg",
+  Snow: "snow.svg",
+  Thunderstorm: "thunder.svg",
+  Fog: "fog.svg",
+  Drizzle: "drizzle.svg",
+  Hail: "hail.svg",
+  Haze: "haze.svg",
+  NotAvailable: "not-available.svg"
 };
-
-function getWeatherImg(condition) {
-  return imgMap[condition] || cloudy;
+   return `/meteocons/${imgMap[condition] || "not-available.svg"}`;
 }
-
-export default getWeatherImg;

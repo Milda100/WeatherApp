@@ -2,13 +2,10 @@ import { Card } from "react-bootstrap";
 import getWeatherImg from "./getWeatherImg";
 import { FaDroplet, FaWind } from "react-icons/fa6";
 
-
-
-
-    function CurrentWeather({ selectedCity, weather, error }) {
+function CurrentWeather({ selectedCity, weather, error }) {
   if (!selectedCity && !weather && !error) return null;
 
-const currentCondition = weather?.weather?.[0]?.main || "Clouds";
+const currentCondition = weather?.weather?.[0]?.main;
 const weatherImg = getWeatherImg(currentCondition);
 
   return (
