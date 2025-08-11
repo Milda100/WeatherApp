@@ -11,5 +11,5 @@ export default function getWeatherImg(condition) {
   Haze: "haze.svg",
   NotAvailable: "not-available.svg"
 };
-   return `/meteocons/${imgMap[condition] || "not-available.svg"}`;
+  return `${process.env.PUBLIC_URL}/meteocons/${imgMap[condition] || "not-available.svg"}`;
 }
