@@ -1,10 +1,13 @@
 {
   "name": "weather-app",
+  "homepage": "https://milda100.github.io/WeatherApp/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,6 +16,7 @@
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "dayjs": "^1.11.13",
+    "gh-pages": "^6.3.0",
     "meteocons": "^3.0.0-dev",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
